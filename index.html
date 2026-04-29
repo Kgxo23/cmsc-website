@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>CMSC - Cizrein Marine Services Co. | Welcome</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Barlow', -apple-system, 'SF Pro Display', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    background: url('images/bg.jpg') center/cover no-repeat fixed;
+    position: relative;
+    min-height: 100vh;
+    color: #fff;
+}
+
+/* ===== LIGHTER OVERLAYS - White-based gradient blur (bright & airy) ===== */
+
+/* Layer 1: Very light white-to-soft gradient - brightens the image */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(145deg,
+        rgba(255, 255, 255, 0.08) 0%,
+        rgba(255, 255, 255, 0.05) 30%,
+        rgba(255, 255, 255, 0.02) 60%,
+        rgba(255, 255, 255, 0.04) 100%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Layer 2: White-based blur vignette - bright, airy */
+.blur-vignette {
+    position: fixed;
+    inset: 0;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    mask-image: radial-gradient(ellipse 75% 70% at 50% 50%,
+        transparent 0%,
+        rgba(255, 255, 255, 0.1) 30%,
+        rgba(255, 255, 255, 0.3) 60%,
+        rgba(255, 255, 255, 0.5) 100%);
+    -webkit-mask-image: radial-gradient(ellipse 75% 70% at 50% 50%,
+        transparent 0%,
+        rgba(255, 255, 255, 0.1) 30%,
+        rgba(255, 255, 255, 0.3) 60%,
+        rgba(255, 255, 255, 0.5) 100%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Layer 3: Very subtle aqua/royal glow at bottom */
+body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse 50% 30% at 50% 85%,
+        rgba(0, 188, 212, 0.08) 0%,
+        rgba(21, 101, 192, 0.05) 50%,
+        transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* All main content above overlays */
+.navbar, .hero, .footer {
+    position: relative;
+    z-index: 2;
+}
+
+/* ===== ROYAL/AQUA GLASS NAVBAR - Logo moved left ===== */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background: rgba(21, 101, 192, 0.68);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 60px;
+    height: 80px;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(0, 188, 212, 0.55);
+    box-shadow: 0 1px 0 rgba(0, 188, 212, 0.2), 0 4px 20px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+
+/* Dual-tone accent line at top */
+.navbar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        #1565c0 20%,
+        #00bcd4 50%,
+        #1565c0 80%,
+        transparent 100%);
+    opacity: 0.9;
+}
+
+.navbar:hover {
+    background: rgba(21, 101, 192, 0.78);
+    box-shadow: 0 1px 0 rgba(0, 188, 212, 0.35), 0 6px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* LOGO - moved more to the left */
+.logo {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    margin-left: -20px;
+}
+
+.logo img {
+    height: 52px;
+    width: auto;
+    display: block;
+    filter: drop-shadow(0 0 10px rgba(0, 188, 212, 0.5));
+    transition: filter 0.3s ease, transform 0.25s ease;
+}
+
+.logo img:hover {
+    transform: scale(1.03);
+    filter: drop-shadow(0 0 18px rgba(0, 188, 212, 0.8));
+}
+
+/* NAV LINKS */
+.navbar nav {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    gap: 4px;
+}
+
+.navbar nav a {
+    color: rgba(255, 255, 255, 0.88);
+    margin-left: 36px;
+    text-decoration: none;
+    font-family: 'Barlow', sans-serif;
+    font-weight: 600;
+    font-size: 0.82rem;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    padding: 6px 0 5px;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: color 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+    position: relative;
+}
+
+.navbar nav a:first-child {
+    margin-left: 0;
+}
+
+.navbar nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #00bcd4, #1e88e5);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s ease;
+}
+
+.navbar nav a:hover {
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+.navbar nav a:hover::after {
+    transform: scaleX(1);
+}
+
+.navbar nav a.active {
+    color: #4dd0e1;
+}
+
+.navbar nav a.active::after {
+    transform: scaleX(1);
+    background: linear-gradient(90deg, #00bcd4, #1e88e5);
+}
+
+/* ===== HERO SECTION ===== */
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.hero-content {
+    text-align: center;
+    animation: heroFadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes heroFadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(28px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-content img {
+    width: 320px;
+    display: block;
+    margin: 0 auto;
+    filter:
+        drop-shadow(0 0 28px rgba(0, 188, 212, 0.35))
+        drop-shadow(0 8px 20px rgba(0, 0, 0, 0.25));
+    transition: filter 0.4s ease;
+}
+
+.hero-content img:hover {
+    filter:
+        drop-shadow(0 0 42px rgba(0, 188, 212, 0.6))
+        drop-shadow(0 8px 20px rgba(0, 0, 0, 0.25));
+}
+
+/* Tagline pill - lighter glass with royal/aqua border */
+.hero-content p {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 28px;
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 10px 28px;
+    border-radius: 2px;
+    border: 1px solid rgba(0, 188, 212, 0.5);
+    border-left: 3px solid #00bcd4;
+    box-shadow: 0 0 24px rgba(0, 188, 212, 0.12), inset 0 1px 0 rgba(255,255,255,0.08);
+}
+
+/* Aqua dot */
+.hero-content p::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #00bcd4;
+    flex-shrink: 0;
+    box-shadow: 0 0 12px #00bcd4;
+    animation: pulse 2.2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 6px #00bcd4; }
+    50%       { opacity: 0.5; box-shadow: 0 0 16px #4dd0e1; }
+}
+
+/* ===== ROYAL/AQUA GLASS FOOTER ===== */
+.footer {
+    background: rgba(21, 101, 192, 0.68);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    color: rgba(255, 255, 255, 0.85);
+    text-align: center;
+    padding: 13px 20px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    z-index: 100;
+    border-top: 1px solid rgba(0, 188, 212, 0.4);
+    box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.12);
+    transition: all 0.3s ease;
+}
+
+.footer:hover {
+    background: rgba(21, 101, 192, 0.78);
+    color: white;
+    border-top-color: rgba(0, 188, 212, 0.65);
+}
+
+/* Royal/Aqua accent line at bottom of footer */
+.footer::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        #1565c0 25%,
+        #00bcd4 50%,
+        #1565c0 75%,
+        transparent 100%);
+    opacity: 0.75;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0 30px;
+        height: 70px;
+    }
+    
+    .logo {
+        margin-left: -10px;
+    }
+    
+    .logo img {
+        height: 44px;
+    }
+    
+    .navbar nav a {
+        margin-left: 22px;
+        font-size: 0.78rem;
+        letter-spacing: 1.4px;
+    }
+    
+    .hero-content img {
+        width: 240px;
+    }
+    
+    .hero-content p {
+        font-size: 0.78rem;
+        padding: 8px 20px;
+        letter-spacing: 2px;
+    }
+}
+
+@media (max-width: 580px) {
+    .navbar {
+        padding: 0 20px;
+        height: 64px;
+    }
+    
+    .logo {
+        margin-left: -5px;
+    }
+    
+    .logo img {
+        height: 38px;
+    }
+    
+    .navbar nav a {
+        margin-left: 14px;
+        font-size: 0.72rem;
+        letter-spacing: 1.2px;
+    }
+    
+    .hero-content img {
+        width: 195px;
+    }
+    
+    .hero-content p {
+        font-size: 0.7rem;
+        padding: 8px 16px;
+        letter-spacing: 1.6px;
+    }
+}
+
+@media (max-width: 420px) {
+    .navbar {
+        padding: 0 14px;
+        height: 58px;
+    }
+    
+    .logo {
+        margin-left: 0;
+    }
+    
+    .logo img {
+        height: 32px;
+    }
+    
+    .navbar nav a {
+        margin-left: 10px;
+        font-size: 0.65rem;
+        letter-spacing: 1px;
+    }
+    
+    .hero-content img {
+        width: 165px;
+    }
+    
+    .hero-content p {
+        font-size: 0.65rem;
+        padding: 7px 14px;
+        letter-spacing: 1.2px;
+        gap: 8px;
+    }
+}
+
+@media (max-height: 500px) {
+    .navbar { height: 56px; }
+    .logo img { height: 32px; }
+    .hero-content img { width: 140px; }
+    .hero-content p { margin-top: 12px; font-size: 0.68rem; }
+    .footer { padding: 8px 20px; font-size: 0.65rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- White-based blur vignette overlay (bright, airy) -->
+<div class="blur-vignette"></div>
+
+<!-- ROYAL & AQUA BLUE GLASS NAVBAR with logo shifted left -->
+<header class="navbar">
+    <div class="logo">
+        <img src="images/ship-logo.png" alt="CMSC Logo">
+    </div>
+    <nav>
+        <a href="index.html" class="active">HOME</a>
+        <a href="about.html">ABOUT</a>
+        <a href="services.html">SERVICES</a>
+        <a href="contact.html">CONTACT</a>
+    </nav>
+</header>
+
+<!-- HERO SECTION -->
+<section class="hero">
+    <div class="hero-content">
+        <img src="images/full-logo.png" alt="CMSC Full Logo">
+        <p>Your Trusted Partner in Marine Excellence</p>
+    </div>
+</section>
+
+<!-- ROYAL & AQUA BLUE GLASS FOOTER -->
+<footer class="footer">
+    <p>&copy; 2025 Cizrein Marine Services Co. (CMSC). All rights reserved.</p>
+</footer>
+
+</body>
+</html>

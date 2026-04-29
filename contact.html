@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>CMSC - Contact Us | Cizrein Marine Services Co.</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Barlow', -apple-system, 'SF Pro Display', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    background: url('images/bg.jpg') center/cover no-repeat fixed;
+    position: relative;
+    min-height: 100vh;
+    color: #fff;
+}
+
+/* ===== LIGHTER OVERLAYS - White-based gradient blur ===== */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(145deg,
+        rgba(255, 255, 255, 0.08) 0%,
+        rgba(255, 255, 255, 0.05) 30%,
+        rgba(255, 255, 255, 0.02) 60%,
+        rgba(255, 255, 255, 0.04) 100%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.blur-vignette {
+    position: fixed;
+    inset: 0;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    mask-image: radial-gradient(ellipse 75% 70% at 50% 50%,
+        transparent 0%,
+        rgba(255, 255, 255, 0.1) 30%,
+        rgba(255, 255, 255, 0.3) 60%,
+        rgba(255, 255, 255, 0.5) 100%);
+    -webkit-mask-image: radial-gradient(ellipse 75% 70% at 50% 50%,
+        transparent 0%,
+        rgba(255, 255, 255, 0.1) 30%,
+        rgba(255, 255, 255, 0.3) 60%,
+        rgba(255, 255, 255, 0.5) 100%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse 50% 30% at 50% 85%,
+        rgba(0, 188, 212, 0.08) 0%,
+        rgba(21, 101, 192, 0.05) 50%,
+        transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.navbar, .page-header, .contact-container, .maps-section, .footer {
+    position: relative;
+    z-index: 2;
+}
+
+/* ===== ROYAL/AQUA GLASS NAVBAR ===== */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background: rgba(21, 101, 192, 0.68);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 60px;
+    height: 80px;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(0, 188, 212, 0.55);
+    box-shadow: 0 1px 0 rgba(0, 188, 212, 0.2), 0 4px 20px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+
+.navbar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        #1565c0 20%,
+        #00bcd4 50%,
+        #1565c0 80%,
+        transparent 100%);
+    opacity: 0.9;
+}
+
+.navbar:hover {
+    background: rgba(21, 101, 192, 0.78);
+    box-shadow: 0 1px 0 rgba(0, 188, 212, 0.35), 0 6px 24px rgba(0, 0, 0, 0.2);
+}
+
+.logo {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    margin-left: -20px;
+}
+
+.logo img {
+    height: 52px;
+    width: auto;
+    display: block;
+    filter: drop-shadow(0 0 10px rgba(0, 188, 212, 0.5));
+    transition: filter 0.3s ease, transform 0.25s ease;
+}
+
+.logo img:hover {
+    transform: scale(1.03);
+    filter: drop-shadow(0 0 18px rgba(0, 188, 212, 0.8));
+}
+
+.navbar nav {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    gap: 4px;
+}
+
+.navbar nav a {
+    color: rgba(255, 255, 255, 0.88);
+    margin-left: 36px;
+    text-decoration: none;
+    font-family: 'Barlow', sans-serif;
+    font-weight: 600;
+    font-size: 0.82rem;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    padding: 6px 0 5px;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: color 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+    position: relative;
+}
+
+.navbar nav a:first-child {
+    margin-left: 0;
+}
+
+.navbar nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #00bcd4, #1e88e5);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s ease;
+}
+
+.navbar nav a:hover {
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+.navbar nav a:hover::after {
+    transform: scaleX(1);
+}
+
+.navbar nav a.active {
+    color: #4dd0e1;
+}
+
+.navbar nav a.active::after {
+    transform: scaleX(1);
+    background: linear-gradient(90deg, #00bcd4, #1e88e5);
+}
+
+/* ===== PAGE HEADER ===== */
+.page-header {
+    background: rgba(10, 12, 15, 0.4);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: white;
+    padding: 140px 40px 60px;
+    text-align: center;
+    margin-bottom: 40px;
+    border-bottom: 1px solid rgba(0, 188, 212, 0.3);
+}
+
+.page-header h1 {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, #fff, #4dd0e1);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.page-header p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    font-weight: 400;
+    color: #b0bec5;
+}
+
+/* ===== CONTACT CONTAINER ===== */
+.contact-container {
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 0 40px;
+    display: flex;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+.contact-info {
+    flex: 1;
+    background: rgba(20, 30, 45, 0.75);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    padding: 40px;
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(0, 188, 212, 0.35);
+    transition: all 0.3s ease;
+}
+
+.contact-info:hover {
+    transform: translateY(-5px);
+    background: rgba(21, 101, 192, 0.6);
+    border-color: rgba(0, 188, 212, 0.6);
+}
+
+.contact-info h2 {
+    font-size: 1.8rem;
+    color: #4dd0e1;
+    margin-bottom: 30px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 16px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 188, 212, 0.2);
+}
+
+.info-item:hover {
+    background: rgba(0, 0, 0, 0.4);
+    transform: translateX(5px);
+    border-color: rgba(0, 188, 212, 0.5);
+}
+
+.info-icon {
+    font-size: 2rem;
+    filter: drop-shadow(0 0 4px rgba(0, 188, 212, 0.5));
+}
+
+.info-item h3 {
+    font-size: 0.85rem;
+    color: #b0bec5;
+    margin-bottom: 5px;
+    font-weight: 500;
+    letter-spacing: -0.2px;
+}
+
+.info-item p {
+    font-size: 1rem;
+    color: #ffffff;
+    font-weight: 500;
+}
+
+.business-hours {
+    flex: 1;
+    background: rgba(20, 30, 45, 0.75);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    padding: 40px;
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(0, 188, 212, 0.35);
+    transition: all 0.3s ease;
+}
+
+.business-hours:hover {
+    transform: translateY(-5px);
+    background: rgba(21, 101, 192, 0.6);
+    border-color: rgba(0, 188, 212, 0.6);
+}
+
+.business-hours h2 {
+    font-size: 1.8rem;
+    color: #4dd0e1;
+    margin-bottom: 30px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+}
+
+.hours-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(0, 188, 212, 0.25);
+}
+
+.hours-item .day {
+    font-weight: 500;
+    color: #cfd8dc;
+}
+
+.hours-item .time {
+    color: #ffffff;
+    font-weight: 500;
+}
+
+.emergency {
+    margin-top: 30px;
+    padding: 20px;
+    background: rgba(0, 188, 212, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    text-align: center;
+    border: 1px solid rgba(0, 188, 212, 0.4);
+}
+
+.emergency h3 {
+    color: #4dd0e1;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.emergency p {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #ffffff;
+}
+
+.emergency p:last-child {
+    color: #b0bec5;
+    font-size: 0.85rem;
+}
+
+/* ===== MAPS SECTION ===== */
+.maps-section {
+    max-width: 1200px;
+    margin: 0 auto 60px;
+    padding: 0 40px;
+}
+
+.maps-section h2 {
+    font-size: 1.8rem;
+    color: #4dd0e1;
+    margin-bottom: 30px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.maps-grid {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.map-card {
+    flex: 1;
+    min-width: 280px;
+    background: rgba(20, 30, 45, 0.75);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-radius: 24px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 188, 212, 0.35);
+    transition: all 0.3s ease;
+}
+
+.map-card:hover {
+    transform: translateY(-5px);
+    background: rgba(21, 101, 192, 0.6);
+    border-color: rgba(0, 188, 212, 0.6);
+}
+
+.map-card h3 {
+    font-size: 1.3rem;
+    color: #4dd0e1;
+    padding: 20px 20px 10px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.map-card p {
+    color: #b0bec5;
+    text-align: center;
+    padding: 0 20px 10px;
+    font-size: 0.85rem;
+}
+
+/* Map Image Container */
+.map-image-container {
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.map-image {
+    width: 100%;
+    height: auto;
+    max-height: 250px;
+    object-fit: contain;
+    border-radius: 16px;
+    border: 1px solid rgba(0, 188, 212, 0.3);
+    transition: all 0.3s ease;
+    display: block;
+}
+
+.map-image:hover {
+    transform: scale(1.02);
+    border-color: rgba(0, 188, 212, 0.8);
+    box-shadow: 0 0 15px rgba(0, 188, 212, 0.3);
+}
+
+/* Action Buttons Container */
+.map-actions {
+    display: flex;
+    gap: 12px;
+    margin: 10px 20px 15px;
+}
+
+.map-btn {
+    flex: 1;
+    text-align: center;
+    padding: 12px;
+    border-radius: 40px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    font-family: inherit;
+}
+
+.map-btn-view {
+    background: rgba(0, 188, 212, 0.2);
+    color: #4dd0e1;
+    border: 1px solid rgba(0, 188, 212, 0.4);
+    text-decoration: none;
+    display: inline-block;
+}
+
+.map-btn-view:hover {
+    background: rgba(0, 188, 212, 0.4);
+    color: #ffffff;
+}
+
+.map-btn-nav {
+    background: rgba(21, 101, 192, 0.4);
+    color: #4dd0e1;
+    border: 1px solid rgba(0, 188, 212, 0.4);
+    text-decoration: none;
+    display: inline-block;
+}
+
+.map-btn-nav:hover {
+    background: rgba(21, 101, 192, 0.7);
+    color: #ffffff;
+}
+
+.map-note {
+    font-size: 0.7rem;
+    color: #b0bec5;
+    text-align: center;
+    padding: 12px;
+    border-top: 1px solid rgba(0, 188, 212, 0.2);
+}
+
+/* ===== LIGHTBOX / MODAL FOR LARGER IMAGE ===== */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.lightbox.active {
+    display: flex;
+}
+
+.lightbox img {
+    max-width: 90%;
+    max-height: 80%;
+    object-fit: contain;
+    border-radius: 16px;
+    border: 2px solid rgba(0, 188, 212, 0.5);
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 40px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: none;
+    border: none;
+    font-family: inherit;
+}
+
+.lightbox-close:hover {
+    color: #4dd0e1;
+    transform: scale(1.1);
+}
+
+.lightbox-caption {
+    margin-top: 20px;
+    color: #4dd0e1;
+    font-size: 1rem;
+    text-align: center;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+    background: rgba(21, 101, 192, 0.68);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    color: rgba(255, 255, 255, 0.85);
+    text-align: center;
+    padding: 13px 20px;
+    margin-top: 60px;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    border-top: 1px solid rgba(0, 188, 212, 0.4);
+    box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.12);
+    transition: all 0.3s ease;
+}
+
+.footer:hover {
+    background: rgba(21, 101, 192, 0.78);
+    color: white;
+    border-top-color: rgba(0, 188, 212, 0.65);
+}
+
+.footer::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        #1565c0 25%,
+        #00bcd4 50%,
+        #1565c0 75%,
+        transparent 100%);
+    opacity: 0.75;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0 30px;
+        height: 70px;
+    }
+    
+    .logo {
+        margin-left: -10px;
+    }
+    
+    .logo img {
+        height: 44px;
+    }
+    
+    .navbar nav a {
+        margin-left: 22px;
+        font-size: 0.78rem;
+        letter-spacing: 1.4px;
+    }
+    
+    .page-header h1 {
+        font-size: 2rem;
+    }
+    
+    .page-header p {
+        font-size: 1rem;
+    }
+    
+    .contact-container {
+        flex-direction: column;
+    }
+    
+    .contact-info, .business-hours {
+        padding: 30px;
+    }
+    
+    .maps-grid {
+        flex-direction: column;
+    }
+    
+    .map-actions {
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+
+@media (max-width: 580px) {
+    .navbar {
+        padding: 0 20px;
+        height: 64px;
+    }
+    
+    .logo {
+        margin-left: -5px;
+    }
+    
+    .logo img {
+        height: 38px;
+    }
+    
+    .navbar nav a {
+        margin-left: 14px;
+        font-size: 0.72rem;
+        letter-spacing: 1.2px;
+    }
+    
+    .page-header {
+        padding: 120px 20px 40px;
+    }
+    
+    .contact-container {
+        padding: 0 20px;
+    }
+    
+    .contact-info, .business-hours {
+        padding: 25px;
+    }
+    
+    .info-icon {
+        font-size: 1.5rem;
+    }
+    
+    .maps-section {
+        padding: 0 20px;
+    }
+    
+    .map-card h3 {
+        font-size: 1.1rem;
+    }
+    
+    .map-image {
+        max-height: 200px;
+    }
+}
+
+@media (max-width: 420px) {
+    .navbar {
+        padding: 0 14px;
+        height: 58px;
+    }
+    
+    .logo {
+        margin-left: 0;
+    }
+    
+    .logo img {
+        height: 32px;
+    }
+    
+    .navbar nav a {
+        margin-left: 10px;
+        font-size: 0.65rem;
+        letter-spacing: 1px;
+    }
+    
+    .page-header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .contact-info h2, .business-hours h2 {
+        font-size: 1.5rem;
+    }
+    
+    .map-image {
+        max-height: 180px;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="blur-vignette"></div>
+
+<header class="navbar">
+    <div class="logo">
+        <img src="images/ship-logo.png" alt="CMSC Logo">
+    </div>
+    <nav>
+        <a href="index.html">HOME</a>
+        <a href="about.html">ABOUT</a>
+        <a href="services.html">SERVICES</a>
+        <a href="contact.html" class="active">CONTACT</a>
+    </nav>
+</header>
+
+<div class="page-header">
+    <h1>Contact Us</h1>
+    <p>Get in Touch with Our Marine Experts</p>
+</div>
+
+<div class="contact-container">
+    <div class="contact-info">
+        <h2>Contact Information</h2>
+        
+        <div class="info-item">
+            <div class="info-icon">📞</div>
+            <div>
+                <h3>Phone Numbers</h3>
+                <p>0918-315762 / 0917-1709537</p>
+            </div>
+        </div>
+        
+        <div class="info-item">
+            <div class="info-icon">✉️</div>
+            <div>
+                <h3>Email Address</h3>
+                <p>findul.cmsc@gmail.com</p>
+            </div>
+        </div>
+        
+        <div class="info-item">
+            <div class="info-icon">📍</div>
+            <div>
+                <h3>Main Office</h3>
+                <p>Subic Bay Freeport Zone, Philippines</p>
+            </div>
+        </div>
+        
+        <div class="info-item">
+            <div class="info-icon">🏭</div>
+            <div>
+                <h3>Shipyard Location</h3>
+                <p>Cebu Dry Dock Complex, Cebu City</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="business-hours">
+        <h2>Business Hours</h2>
+        
+        <div class="hours-item">
+            <span class="day">Monday - Friday</span>
+            <span class="time">8:00 AM - 6:00 PM</span>
+        </div>
+        
+        <div class="hours-item">
+            <span class="day">Saturday</span>
+            <span class="time">9:00 AM - 4:00 PM</span>
+        </div>
+        
+        <div class="hours-item">
+            <span class="day">Sunday</span>
+            <span class="time">Closed</span>
+        </div>
+        
+        <div class="emergency">
+            <h3>🚨 24/7 Emergency Support</h3>
+            <p>Call our emergency hotline: 0918-315762</p>
+            <p>Available for urgent marine assistance</p>
+        </div>
+    </div>
+</div>
+
+<!-- TWO MAPS SECTION WITH LIGHTBOX -->
+<div class="maps-section">
+    <h2>Our Locations</h2>
+    <div class="maps-grid">
+        
+        <!-- Main Office Map Card -->
+        <div class="map-card">
+            <h3>🏢 Main Office</h3>
+            <p>Subic Bay Freeport Zone, Philippines</p>
+            
+            <!-- Map Image - Click to open lightbox -->
+            <div class="map-image-container" onclick="openLightbox('images/clc-map.png', 'Main Office - Subic Bay Freeport Zone')">
+                <img src="images/clc-map.png" alt="Subic Bay Office Location Map" class="map-image" onerror="this.src='https://maps.app.goo.gl/fH2627tRxUEWEFta9'">
+            </div>
+                
+            <div class="map-actions">
+                <button class="map-btn map-btn-view" onclick="openLightbox('images/cmsc-map.png', 'Main Office - Subic Bay Freeport Zone')">
+                    🔍 View Full Size
+                </button>
+                <a href="https://maps.app.goo.gl/fH2627tRxUEWEFta9" target="_blank" class="map-btn map-btn-nav">
+                    📍 Navigate
+                </a>
+            </div>
+            <div class="map-note">
+                Tap "View Full Size" to see full map
+            </div>
+        </div>
+        
+        <!-- Shipyard Map Card -->
+        <div class="map-card">
+            <h3>🏭 Shipyard Branch</h3>
+            <p>Cebu Dry Dock Complex, Cebu City</p>
+            
+            <!-- Map Image - Click to open lightbox -->
+            <div class="map-image-container" onclick="openLightbox('images/clc-map.png', 'Shipyard Branch - Cebu Dry Dock Complex')">
+                <img src="images/cmsc-map.png" alt="Cebu Shipyard Location Map" class="map-image" onerror="this.src='https://placehold.co/600x400/1a2a3a/4dd0e1?text=Cebu+Shipyard+Map'">
+            </div>
+            
+            <div class="map-actions">
+                <button class="map-btn map-btn-view" onclick="openLightbox('images/clc-map.png', 'Shipyard Branch - Cebu Dry Dock Complex')">
+                    🔍 View Full Size
+                </button>
+                <a href="https://maps.app.goo.gl/zd6YQBm651LheZ4j7" target="_blank" class="map-btn map-btn-nav">
+                    📍 Navigate
+                </a>
+            </div>
+            <div class="map-note">
+                Tap "View Full Size" to see full map
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<!-- LIGHTBOX MODAL -->
+<div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <img id="lightbox-img" src="" alt="Map Full Size">
+    <div id="lightbox-caption" class="lightbox-caption"></div>
+</div>
+
+<footer class="footer">
+    <p>&copy; 2025 Cizrein Marine Services Co. (CMSC). All rights reserved.</p>
+</footer>
+
+<script>
+// Lightbox functions
+function openLightbox(imageSrc, caption) {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    
+    lightboxImg.src = imageSrc;
+    lightboxCaption.textContent = caption;
+    lightbox.classList.add('active');
+    
+    // Prevent body scrolling when lightbox is open
+    document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    lightbox.classList.remove('active');
+    
+    // Restore body scrolling
+    document.body.style.overflow = '';
+}
+
+// Close lightbox with Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeLightbox();
+    }
+});
+</script>
+
+</body>
+</html>

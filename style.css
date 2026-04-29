@@ -1,0 +1,134 @@
+/* style.css - Shared styles for all CMSC pages */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', 'Poppins', 'Arial', sans-serif;
+    background-color: #f4f7fc;
+    color: #1a2a3a;
+}
+
+/* NAVBAR */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(135deg, #0a1f3e, #0b2b4f, #123e6e);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 5%;
+    z-index: 1000;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.logo img {
+    height: 48px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 32px;
+}
+
+.navbar nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.05rem;
+    padding: 6px 0;
+    transition: 0.2s;
+    border-bottom: 2px solid transparent;
+}
+
+.navbar nav a:hover {
+    color: #7bc5ff;
+    border-bottom-color: #7bc5ff;
+}
+
+/* SECTIONS */
+.section {
+    padding: 100px 5%;
+    min-height: 60vh;
+}
+
+.section-light {
+    background: #ffffff;
+}
+
+.section-dark {
+    background: #0c1e2f;
+    color: #f0f9ff;
+}
+
+.section h2 {
+    font-size: 2.6rem;
+    margin-bottom: 36px;
+    position: relative;
+    display: inline-block;
+}
+
+.section h2:after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 0;
+    width: 70px;
+    height: 4px;
+    background: #1e88e5;
+    border-radius: 4px;
+}
+
+/* CARDS for services */
+.cards {
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    justify-content: center;
+}
+
+.card {
+    background: white;
+    border-radius: 28px;
+    padding: 40px 28px;
+    flex: 1;
+    min-width: 200px;
+    text-align: center;
+    transition: 0.25s;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #0a2f44;
+    border-bottom: 5px solid #1e88e5;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+}
+
+/* CONTACT styling */
+.contact-page p {
+    font-size: 1.2rem;
+    margin: 15px 0;
+    padding: 10px;
+}
+
+/* Responsive */
+@media (max-width: 780px) {
+    .navbar {
+        flex-direction: column;
+        gap: 12px;
+    }
+    .nav-links {
+        gap: 24px;
+        flex-wrap: wrap;
+    }
+    .section h2 {
+        font-size: 2rem;
+    }
+}

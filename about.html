@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>CMSC - About Us | Cizrein Marine Services Co.</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Barlow', -apple-system, 'SF Pro Display', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    background: url('images/bg.jpg') center/cover no-repeat fixed;
+    position: relative;
+    min-height: 100vh;
+    color: #fff;
+}
+
+/* ===== LIGHTER OVERLAYS - White-based gradient blur (bright & airy) ===== */
+
+/* Layer 1: Very light white-to-soft gradient - brightens the image */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(145deg,
+        rgba(255, 255, 255, 0.08) 0%,
+        rgba(255, 255, 255, 0.05) 30%,
+        rgba(255, 255, 255, 0.02) 60%,
+        rgba(255, 255, 255, 0.04) 100%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Layer 2: White-based blur vignette - bright, airy */
+.blur-vignette {
+    position: fixed;
+    inset: 0;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    mask-image: radial-gradient(ellipse 75% 70% at 50% 50%,
+        transparent 0%,
+        rgba(255, 255, 255, 0.1) 30%,
+        rgba(255, 255, 255, 0.3) 60%,
+        rgba(255, 255, 255, 0.5) 100%);
+    -webkit-mask-image: radial-gradient(ellipse 75% 70% at 50% 50%,
+        transparent 0%,
+        rgba(255, 255, 255, 0.1) 30%,
+        rgba(255, 255, 255, 0.3) 60%,
+        rgba(255, 255, 255, 0.5) 100%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Layer 3: Very subtle aqua/royal glow at bottom */
+body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse 50% 30% at 50% 85%,
+        rgba(0, 188, 212, 0.08) 0%,
+        rgba(21, 101, 192, 0.05) 50%,
+        transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* All main content above overlays */
+.navbar, .page-header, .about-content, .footer {
+    position: relative;
+    z-index: 2;
+}
+
+/* ===== ROYAL/AQUA GLASS NAVBAR ===== */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background: rgba(21, 101, 192, 0.68);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 60px;
+    height: 80px;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(0, 188, 212, 0.55);
+    box-shadow: 0 1px 0 rgba(0, 188, 212, 0.2), 0 4px 20px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+
+/* Dual-tone accent line at top */
+.navbar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        #1565c0 20%,
+        #00bcd4 50%,
+        #1565c0 80%,
+        transparent 100%);
+    opacity: 0.9;
+}
+
+.navbar:hover {
+    background: rgba(21, 101, 192, 0.78);
+    box-shadow: 0 1px 0 rgba(0, 188, 212, 0.35), 0 6px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* LOGO */
+.logo {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    margin-left: -20px;
+}
+
+.logo img {
+    height: 52px;
+    width: auto;
+    display: block;
+    filter: drop-shadow(0 0 10px rgba(0, 188, 212, 0.5));
+    transition: filter 0.3s ease, transform 0.25s ease;
+}
+
+.logo img:hover {
+    transform: scale(1.03);
+    filter: drop-shadow(0 0 18px rgba(0, 188, 212, 0.8));
+}
+
+/* NAV LINKS */
+.navbar nav {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    gap: 4px;
+}
+
+.navbar nav a {
+    color: rgba(255, 255, 255, 0.88);
+    margin-left: 36px;
+    text-decoration: none;
+    font-family: 'Barlow', sans-serif;
+    font-weight: 600;
+    font-size: 0.82rem;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    padding: 6px 0 5px;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: color 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+    position: relative;
+}
+
+.navbar nav a:first-child {
+    margin-left: 0;
+}
+
+.navbar nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #00bcd4, #1e88e5);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s ease;
+}
+
+.navbar nav a:hover {
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+.navbar nav a:hover::after {
+    transform: scaleX(1);
+}
+
+.navbar nav a.active {
+    color: #4dd0e1;
+}
+
+.navbar nav a.active::after {
+    transform: scaleX(1);
+    background: linear-gradient(90deg, #00bcd4, #1e88e5);
+}
+
+/* ===== PAGE HEADER - Glass morphism ===== */
+.page-header {
+    background: rgba(10, 12, 15, 0.4);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: white;
+    padding: 140px 40px 60px;
+    text-align: center;
+    margin-bottom: 40px;
+    border-bottom: 1px solid rgba(0, 188, 212, 0.3);
+}
+
+.page-header h1 {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, #fff, #4dd0e1);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.page-header p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    font-weight: 400;
+    color: #b0bec5;
+}
+
+/* ===== ABOUT CONTENT ===== */
+.about-content {
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 0 40px;
+}
+
+/* Story Section */
+.about-section {
+    display: flex;
+    gap: 50px;
+    align-items: center;
+    margin-bottom: 60px;
+    flex-wrap: wrap;
+    background: rgba(20, 30, 45, 0.65);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    padding: 50px;
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(0, 188, 212, 0.35);
+    transition: all 0.3s ease;
+}
+
+.about-section:hover {
+    transform: translateY(-5px);
+    background: rgba(21, 101, 192, 0.5);
+    border-color: rgba(0, 188, 212, 0.6);
+}
+
+.about-text {
+    flex: 1;
+}
+
+.about-text h2 {
+    font-size: 2rem;
+    color: #4dd0e1;
+    margin-bottom: 20px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+}
+
+.about-text p {
+    line-height: 1.8;
+    color: #cfd8dc;
+    margin-bottom: 20px;
+    font-size: 1rem;
+}
+
+.about-image {
+    flex: 1;
+}
+
+.about-image img {
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(0, 188, 212, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.about-image img:hover {
+    transform: scale(1.02);
+}
+
+/* Partners Highlight Box */
+.partners-highlight {
+    background: rgba(20, 30, 45, 0.65);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-radius: 24px;
+    padding: 35px 45px;
+    margin-bottom: 60px;
+    border-left: 4px solid #00bcd4;
+    border-right: 1px solid rgba(0, 188, 212, 0.35);
+    border-top: 1px solid rgba(0, 188, 212, 0.35);
+    border-bottom: 1px solid rgba(0, 188, 212, 0.35);
+    transition: all 0.3s ease;
+}
+
+.partners-highlight:hover {
+    background: rgba(21, 101, 192, 0.5);
+    border-color: rgba(0, 188, 212, 0.6);
+}
+
+.partners-highlight h3 {
+    color: #4dd0e1;
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.partners-highlight p {
+    color: #cfd8dc;
+    line-height: 1.7;
+    font-size: 1rem;
+}
+
+/* Mission Vision Grid */
+.mission-vision {
+    display: flex;
+    gap: 30px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.mv-card {
+    flex: 1;
+    background: rgba(20, 30, 45, 0.65);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    padding: 40px 30px;
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 188, 212, 0.35);
+}
+
+.mv-card:hover {
+    transform: translateY(-5px);
+    background: rgba(21, 101, 192, 0.5);
+    border-color: rgba(0, 188, 212, 0.6);
+}
+
+.mv-card h3 {
+    font-size: 1.8rem;
+    color: #4dd0e1;
+    margin-bottom: 15px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+}
+
+.mv-card p {
+    color: #cfd8dc;
+    line-height: 1.7;
+    font-size: 0.95rem;
+}
+
+/* ===== ROYAL/AQUA GLASS FOOTER ===== */
+.footer {
+    background: rgba(21, 101, 192, 0.68);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    color: rgba(255, 255, 255, 0.85);
+    text-align: center;
+    padding: 13px 20px;
+    margin-top: 60px;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    border-top: 1px solid rgba(0, 188, 212, 0.4);
+    box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.12);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.footer:hover {
+    background: rgba(21, 101, 192, 0.78);
+    color: white;
+    border-top-color: rgba(0, 188, 212, 0.65);
+}
+
+/* Royal/Aqua accent line at bottom of footer */
+.footer::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        #1565c0 25%,
+        #00bcd4 50%,
+        #1565c0 75%,
+        transparent 100%);
+    opacity: 0.75;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0 30px;
+        height: 70px;
+    }
+    
+    .logo {
+        margin-left: -10px;
+    }
+    
+    .logo img {
+        height: 44px;
+    }
+    
+    .navbar nav a {
+        margin-left: 22px;
+        font-size: 0.78rem;
+        letter-spacing: 1.4px;
+    }
+    
+    .page-header h1 {
+        font-size: 2rem;
+    }
+    
+    .page-header p {
+        font-size: 1rem;
+    }
+    
+    .about-section {
+        flex-direction: column;
+        padding: 30px;
+    }
+    
+    .about-text h2 {
+        font-size: 1.5rem;
+    }
+    
+    .about-text p {
+        font-size: 0.9rem;
+    }
+    
+    .partners-highlight {
+        padding: 25px 30px;
+    }
+    
+    .partners-highlight h3 {
+        font-size: 1.2rem;
+    }
+    
+    .partners-highlight p {
+        font-size: 0.9rem;
+    }
+    
+    .mv-card h3 {
+        font-size: 1.5rem;
+    }
+    
+    .mv-card p {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 580px) {
+    .navbar {
+        padding: 0 20px;
+        height: 64px;
+    }
+    
+    .logo {
+        margin-left: -5px;
+    }
+    
+    .logo img {
+        height: 38px;
+    }
+    
+    .navbar nav a {
+        margin-left: 14px;
+        font-size: 0.72rem;
+        letter-spacing: 1.2px;
+    }
+    
+    .page-header {
+        padding: 120px 20px 40px;
+    }
+    
+    .about-content {
+        padding: 0 20px;
+    }
+    
+    .about-section {
+        padding: 25px;
+    }
+    
+    .partners-highlight {
+        padding: 20px 25px;
+    }
+    
+    .mv-card {
+        padding: 25px 20px;
+    }
+}
+
+@media (max-width: 420px) {
+    .navbar {
+        padding: 0 14px;
+        height: 58px;
+    }
+    
+    .logo {
+        margin-left: 0;
+    }
+    
+    .logo img {
+        height: 32px;
+    }
+    
+    .navbar nav a {
+        margin-left: 10px;
+        font-size: 0.65rem;
+        letter-spacing: 1px;
+    }
+    
+    .page-header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .about-text h2 {
+        font-size: 1.3rem;
+    }
+    
+    .mv-card h3 {
+        font-size: 1.3rem;
+    }
+}
+</style>
+</head>
+<body>
+
+<!-- White-based blur vignette overlay (bright, airy) -->
+<div class="blur-vignette"></div>
+
+<!-- ROYAL & AQUA BLUE GLASS NAVBAR -->
+<header class="navbar">
+    <div class="logo">
+        <img src="images/ship-logo.png" alt="CMSC Logo">
+    </div>
+    <nav>
+        <a href="index.html">HOME</a>
+        <a href="about.html" class="active">ABOUT</a>
+        <a href="services.html">SERVICES</a>
+        <a href="contact.html">CONTACT</a>
+    </nav>
+</header>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+    <h1>About CMSC</h1>
+    <p>BIR & SEC Registered Partnership | Excellence in Marine Services Since 2019</p>
+</div>
+
+<!-- ABOUT CONTENT -->
+<div class="about-content">
+    <!-- Our Story Section -->
+    <div class="about-section">
+        <div class="about-text">
+            <h2>Our Story</h2>
+            <p>Cizrein Marine Services Co. (CMSC) is a BIR and SEC registered partnership company, conceptualized in July 2019 by partners <strong>Franciz John Cabial</strong> and <strong>Reina Loraine Inducil</strong>. Born from their rich experience as employees of a family-owned tanker vessel and marine service company, CMSC was established as a natural extension of their expertise serving major oil companies including Petron Corporation and San Miguel Corporation.</p>
+            <p>Franciz John supervised the construction and repairs of tanker vessels and tugboats, handling daily vessel operations, fuel consumption analysis, and monitored vessel maintenance including engine repairs and PMS. Reina Loraine took charge of billing, accounting, purchasing and operations, managed contracts with charterers (oil companies), sought potential business ventures, and maintained all trading documents and licenses from MARINA, NTC, OTS, and other government agencies.</p>
+            <p>Inspired by their family business success, they merged Franciz John's field expertise in ship construction and repair with Reina's mastery of internal and external marine office work. CMSC now teams up with shipyards in Navotas and accredited Naval Architects, ensuring their people are fully backed and qualified to handle and monitor ship construction and repairs following the highest existing standards.</p>
+        </div>
+        <div class="about-image">
+            <img src="images/ship2.jpg" alt="CMSC Shipyard Operations">
+        </div>
+    </div>
+
+    <!-- Strategic Partnerships Highlight -->
+    <div class="partners-highlight">
+        <h3>✦ Strategic Partnerships</h3>
+        <p>CMSC proudly teams up with shipyards in Navotas and accredited Naval Architects, ensuring all projects are backed by industry experts and follow strict international standards for ship construction and repairs.</p>
+    </div>
+
+    <!-- Mission & Vision -->
+    <div class="mission-vision">
+        <div class="mv-card">
+            <h3>Our Mission</h3>
+            <p>CMSC is committed to providing high-quality, world-class services that maximize customer satisfaction following international standards. We aim to create quality, innovative, and sustainable products and fabrications using state-of-the-art, safe, and seaworthy equipment that preserves life and protects the environment. We strive to raise our standards to produce superior maritime vessels that meet local and international legal standards. We invest in our people through up-to-date training and development programs, and we preserve strong alliances with partners, suppliers, contractors, clients, and customers.</p>
+        </div>
+        <div class="mv-card">
+            <h3>Our Vision</h3>
+            <p>We envision CMSC to be the leading marine services company in the Philippines and to be recognized globally as an essential contributor to the success of various industries worldwide.</p>
+        </div>
+    </div>
+</div>
+
+<!-- ROYAL & AQUA BLUE GLASS FOOTER -->
+<footer class="footer">
+    <p>&copy; 2025 Cizrein Marine Services Co. (CMSC). All rights reserved. | BIR & SEC Registered Partnership</p>
+</footer>
+
+</body>
+</html>
