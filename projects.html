@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>CMSC - Our Work | Cizrein Marine Services Co.</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Barlow', -apple-system, 'SF Pro Display', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    background: url('images/bg.jpg') center/cover no-repeat fixed;
+    position: relative;
+    min-height: 100vh;
+    color: #fff;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(145deg,
+        rgba(255, 255, 255, 0.08) 0%,
+        rgba(255, 255, 255, 0.05) 30%,
+        rgba(255, 255, 255, 0.02) 60%,
+        rgba(255, 255, 255, 0.04) 100%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.blur-vignette {
+    position: fixed;
+    inset: 0;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    mask-image: radial-gradient(ellipse 75% 70% at 50% 50%,
+        transparent 0%,
+        rgba(255, 255, 255, 0.1) 30%,
+        rgba(255, 255, 255, 0.3) 60%,
+        rgba(255, 255, 255, 0.5) 100%);
+    -webkit-mask-image: radial-gradient(ellipse 75% 70% at 50% 50%,
+        transparent 0%,
+        rgba(255, 255, 255, 0.1) 30%,
+        rgba(255, 255, 255, 0.3) 60%,
+        rgba(255, 255, 255, 0.5) 100%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse 50% 30% at 50% 85%,
+        rgba(0, 188, 212, 0.08) 0%,
+        rgba(21, 101, 192, 0.05) 50%,
+        transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.navbar, .page-header, .projects-container, .footer {
+    position: relative;
+    z-index: 2;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background: rgba(21, 101, 192, 0.68);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 60px;
+    height: 80px;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(0, 188, 212, 0.55);
+    box-shadow: 0 1px 0 rgba(0, 188, 212, 0.2), 0 4px 20px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+
+.navbar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        #1565c0 20%,
+        #00bcd4 50%,
+        #1565c0 80%,
+        transparent 100%);
+    opacity: 0.9;
+}
+
+.navbar:hover {
+    background: rgba(21, 101, 192, 0.78);
+}
+
+.logo {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    margin-left: -20px;
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    text-decoration: none;
+}
+
+.logo img {
+    height: 52px;
+    width: auto;
+    display: block;
+    filter: drop-shadow(0 0 10px rgba(0, 188, 212, 0.5));
+    transition: filter 0.3s ease, transform 0.25s ease;
+}
+
+.logo img:hover {
+    transform: scale(1.03);
+    filter: drop-shadow(0 0 18px rgba(0, 188, 212, 0.8));
+}
+
+.navbar nav {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    gap: 4px;
+}
+
+.navbar nav a {
+    color: rgba(255, 255, 255, 0.88);
+    margin-left: 36px;
+    text-decoration: none;
+    font-family: 'Barlow', sans-serif;
+    font-weight: 600;
+    font-size: 0.82rem;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    padding: 6px 0 5px;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: color 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+    position: relative;
+}
+
+.navbar nav a:first-child {
+    margin-left: 0;
+}
+
+.navbar nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #00bcd4, #1e88e5);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s ease;
+}
+
+.navbar nav a:hover {
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+.navbar nav a:hover::after {
+    transform: scaleX(1);
+}
+
+.navbar nav a.active {
+    color: #4dd0e1;
+}
+
+.navbar nav a.active::after {
+    transform: scaleX(1);
+    background: linear-gradient(90deg, #00bcd4, #1e88e5);
+}
+
+/* ===== PAGE HEADER ===== */
+.page-header {
+    background: rgba(10, 12, 15, 0.4);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: white;
+    padding: 140px 40px 60px;
+    text-align: center;
+    margin-bottom: 40px;
+    border-bottom: 1px solid rgba(0, 188, 212, 0.3);
+}
+
+.page-header h1 {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, #fff, #4dd0e1);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.page-header p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    font-weight: 400;
+    color: #b0bec5;
+}
+
+/* ===== PROJECTS CONTAINER ===== */
+.projects-container {
+    max-width: 1400px;
+    margin: 60px auto;
+    padding: 0 40px;
+}
+
+/* Project Card - Modern Design */
+.project-card {
+    margin-bottom: 80px;
+}
+
+.project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(0, 188, 212, 0.3);
+}
+
+.project-title h2 {
+    font-size: 1.8rem;
+    color: #4dd0e1;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+}
+
+.project-title .vessel-type {
+    font-size: 0.9rem;
+    color: #b0bec5;
+    margin-top: 5px;
+}
+
+.project-meta {
+    text-align: right;
+}
+
+.project-meta .client {
+    font-size: 0.9rem;
+    color: #4dd0e1;
+    font-weight: 500;
+}
+
+.project-meta .year {
+    font-size: 0.8rem;
+    color: #b0bec5;
+    display: block;
+    margin-top: 5px;
+}
+
+/* Gallery Grid - 3 columns */
+.gallery-grid {
+    background: rgba(20, 30, 45, 0.5);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    padding: 30px;
+    border: 1px solid rgba(0, 188, 212, 0.2);
+}
+
+.gallery-row {
+    margin-bottom: 30px;
+}
+
+.gallery-row:last-child {
+    margin-bottom: 0;
+}
+
+.row-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.row-label .label-badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+}
+
+.label-badge.before {
+    background: rgba(198, 40, 40, 0.8);
+    color: white;
+}
+
+.label-badge.after {
+    background: rgba(46, 125, 50, 0.8);
+    color: white;
+}
+
+.row-label span:not(.label-badge) {
+    font-size: 0.8rem;
+    color: #b0bec5;
+}
+
+.image-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.gallery-img {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    aspect-ratio: 4 / 3;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(0, 188, 212, 0.2);
+    transition: all 0.3s ease;
+}
+
+.gallery-img:hover {
+    transform: translateY(-3px);
+    border-color: rgba(0, 188, 212, 0.6);
+}
+
+.gallery-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.gallery-img:hover img {
+    transform: scale(1.05);
+}
+
+.image-number {
+    position: absolute;
+    bottom: 8px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.6rem;
+    color: #4dd0e1;
+}
+
+/* Work Summary */
+.work-summary {
+    margin-top: 25px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 16px;
+}
+
+.work-summary p {
+    color: #cfd8dc;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.services-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.services-list span {
+    background: rgba(0, 188, 212, 0.12);
+    border: 1px solid rgba(0, 188, 212, 0.25);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    color: #4dd0e1;
+}
+
+/* CTA Section */
+.project-cta {
+    text-align: center;
+    margin-top: 60px;
+    padding: 50px;
+    background: rgba(20, 30, 45, 0.7);
+    backdrop-filter: blur(12px);
+    border-radius: 24px;
+    border: 1px solid rgba(0, 188, 212, 0.35);
+}
+
+.project-cta h3 {
+    font-size: 1.6rem;
+    color: #4dd0e1;
+    margin-bottom: 15px;
+}
+
+.project-cta p {
+    color: #b0bec5;
+    margin-bottom: 25px;
+}
+
+.cta-button {
+    display: inline-block;
+    background: rgba(0, 188, 212, 0.2);
+    border: 1px solid rgba(0, 188, 212, 0.5);
+    color: #4dd0e1;
+    padding: 12px 32px;
+    border-radius: 40px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+    background: rgba(0, 188, 212, 0.4);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Footer */
+.footer {
+    background: rgba(21, 101, 192, 0.68);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    color: rgba(255, 255, 255, 0.85);
+    text-align: center;
+    padding: 13px 20px;
+    margin-top: 60px;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    border-top: 1px solid rgba(0, 188, 212, 0.4);
+}
+
+.footer:hover {
+    background: rgba(21, 101, 192, 0.78);
+    color: white;
+    border-top-color: rgba(0, 188, 212, 0.65);
+}
+
+/* Lightbox */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.lightbox.active {
+    display: flex;
+}
+
+.lightbox img {
+    max-width: 90%;
+    max-height: 80%;
+    object-fit: contain;
+    border-radius: 16px;
+    border: 2px solid rgba(0, 188, 212, 0.5);
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 40px;
+    color: white;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+.lightbox-close:hover {
+    color: #4dd0e1;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .image-grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0 30px;
+        height: 70px;
+    }
+    
+    .logo img {
+        height: 44px;
+    }
+    
+    .navbar nav a {
+        margin-left: 18px;
+        font-size: 0.7rem;
+        letter-spacing: 1.2px;
+    }
+    
+    .page-header h1 {
+        font-size: 2rem;
+    }
+    
+    .projects-container {
+        padding: 0 20px;
+    }
+    
+    .project-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .project-meta {
+        text-align: left;
+    }
+    
+    .gallery-grid {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 580px) {
+    .image-grid-3 {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .navbar {
+        padding: 0 15px;
+        height: 64px;
+    }
+    
+    .logo img {
+        height: 38px;
+    }
+    
+    .navbar nav a {
+        margin-left: 12px;
+        font-size: 0.62rem;
+        letter-spacing: 1px;
+    }
+    
+    .page-header {
+        padding: 120px 20px 40px;
+    }
+    
+    .project-title h2 {
+        font-size: 1.4rem;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="blur-vignette"></div>
+
+<header class="navbar">
+    <div class="logo">
+        <a href="index.html">
+            <img src="images/ship-logo.png" alt="CMSC Logo">
+        </a>
+    </div>
+    <nav>
+        <a href="index.html">HOME</a>
+        <a href="about.html">ABOUT</a>
+        <a href="services.html">SERVICES</a>
+        <a href="projects.html" class="active">PROJECTS</a>
+        <a href="contact.html">CONTACT</a>
+    </nav>
+</header>
+
+<div class="page-header">
+    <h1>Our Work</h1>
+    <p>See the transformation — real projects, real results</p>
+</div>
+
+<div class="projects-container">
+
+    <!-- PROJECT 1: SMALL TANKER -->
+    <div class="project-card">
+        <div class="project-header">
+            <div class="project-title">
+                <h2>MT Small Challenger</h2>
+                <div class="vessel-type">⚙️ Small Oil/Chemical Tanker | 15m Length</div>
+            </div>
+            <div class="project-meta">
+                <div class="client">Petron Corporation</div>
+                <div class="year">Completed 2024</div>
+            </div>
+        </div>
+
+        <div class="gallery-grid">
+            <!-- BEFORE ROW - 3 photos -->
+            <div class="gallery-row">
+                <div class="row-label">
+                    <span class="label-badge before">BEFORE</span>
+                    <span>Vessel condition upon arrival</span>
+                </div>
+                <div class="image-grid-3">
+                    <div class="gallery-img" onclick="openLightbox('images/vessels/tanker-before-1.jpg')">
+                        <img src="images/vessels/tanker-before-1.jpg" alt="Before - Hull condition" onerror="this.src='https://placehold.co/400x300/3d1f1f/ff6b6b?text=Hull+Before+1'">
+                        <span class="image-number">01</span>
+                    </div>
+                    <div class="gallery-img" onclick="openLightbox('images/vessels/tanker-before-2.jpg')">
+                        <img src="images/vessels/tanker-before-2.jpg" alt="Before - Engine" onerror="this.src='https://placehold.co/400x300/3d1f1f/ff6b6b?text=Engine+Before'">
+                        <span class="image-number">02</span>
+                    </div>
+                    <div class="gallery-img" onclick="openLightbox('images/vessels/tanker-before-3.jpg')">
+                        <img src="images/vessels/tanker-before-3.jpg" alt="Before - Deck" onerror="this.src='https://placehold.co/400x300/3d1f1f/ff6b6b?text=Deck+Before'">
+                        <span class="image-number">03</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AFTER ROW - 3 photos -->
+            <div class="gallery-row">
+                <div class="row-label">
+                    <span class="label-badge after">AFTER</span>
+                    <span>After restoration and repairs</span>
+                </div>
+                <div class="image-grid-3">
+                    <div class="gallery-img" onclick="openLightbox('images/vessels/tanker-after-1.jpg')">
+                        <img src="images/vessels/tanker-after-1.jpg" alt="After - Hull restored" onerror="this.src='https://placehold.co/400x300/1a3d1f/6bff6b?text=Hull+After+1'">
+                        <span class="image-number">01</span>
+                    </div>
+                    <div class="gallery-img" onclick="openLightbox('images/vessels/tanker-after-2.jpg')">
+                        <img src="images/vessels/tanker-after-2.jpg" alt="After - Engine rebuilt" onerror="this.src='https://placehold.co/400x300/1a3d1f/6bff6b?text=Engine+After'">
+                        <span class="image-number">02</span>
+                    </div>
+                    <div class="gallery-img" onclick="openLightbox('images/vessels/tanker-after-3.jpg')">
+                        <img src="images/vessels/tanker-after-3.jpg" alt="After - Deck restored" onerror="this.src='https://placehold.co/400x300/1a3d1f/6bff6b?text=Deck+After'">
+                        <span class="image-number">03</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="work-summary">
+            <p>Complete engine overhaul, hull sandblasting, and full marine coating application. All machinery systems tested and certified for operation.</p>
+            <div class="services-list">
+                <span>Engine Overhaul</span>
+                <span>Hull Sandblasting</span>
+                <span>Marine Coating</span>
+                <span>Electrical Works</span>
+                <span>Piping Repairs</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- PROJECT 2: TUGBOAT -->
+    <div class="project-card">
+        <div class="project-header">
+            <div class="project-title">
+                <h2>SMC Harbor Tug</h2>
+                <div class="vessel-type">🛥️ Harbor Tugboat | 12m Length</div>
+            </div>
+            <div class="project-meta">
+                <div class="client">San Miguel Corporation</div>
+                <div class="year">Completed 2024</div>
+            </div>
+        </div>
+
+        <div class="gallery-grid">
+            <!-- BEFORE ROW - 3 photos -->
+            <div class="gallery-row">
+                <div class="row-label">
+                    <span class="label-badge before">BEFORE</span>
+                    <span>Pre-restoration condition</span>
+                </div>
+                <div class="image-grid-3">
+                    <div class="gallery-img" onclick="openLightbox('images/vessels/tug-before-1.jpg')">
+                        <img src="images/vessels/tug-before-1.jpg" alt="Before - Hull" onerror="this.src='https://placehold.co/400x300/3d1f1f/ff6b6b?text=Hull+Before'">
+                        <span class="image-number">01</span>
+                    </div>
+                    <div class="gallery-img" onclick="openLightbox('images/vessels/tug-before-2.jpg')">
+                        <img src="images/vessels/tug-before-2.jpg" alt="Before - Propulsion" onerror="this.src='https://placehold.co/400x300/3d1f1f/ff6b6b?text=Propulsion+Before'">
+                        <span class="image-number">02</span>
+                    </div>
+                    <div class="gallery-img" onclick="openLightbox('images/vessels/tug-before-3.jpg')">
+                        <img src="images/vessels/tug-before-3.jpg" alt="Before - Wheelhouse" onerror="this.src='https://placehold.co/400x300/3d1f1f/ff6b6b?text=Wheelhouse+Before'">
+                        <span class="image-number">03</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AFTER ROW - 3 photos -->
+            <div class="gallery-row">
+                <div class="row-label">
+                    <span class="label-badge after">AFTER</span>
+                    <span>After complete refit</span>
+                </div>
+                <div class="image-grid-3">
+                    <div class="gallery-img" onclick="openLightbox('images/vessels/tug-after-1.jpg')">
+                        <img src="images/vessels/tug-after-1.jpg" alt="After - Hull" onerror="this.src='https://placehold.co/400x300/1a3d1f/6bff6b?text=Hull+After'">
+                        <span class="image-number">01</span>
+                    </div>
+                    <div class="gallery-img" onclick="openLightbox('images/vessels/tug-after-2.jpg')">
+                        <img src="images/vessels/tug-after-2.jpg" alt="After - Propulsion" onerror="this.src='https://placehold.co/400x300/1a3d1f/6bff6b?text=Propulsion+After'">
+                        <span class="image-number">02</span>
+                    </div>
+                    <div class="gallery-img" onclick="openLightbox('images/vessels/tug-after-3.jpg')">
+                        <img src="images/vessels/tug-after-3.jpg" alt="After - Wheelhouse" onerror="this.src='https://placehold.co/400x300/1a3d1f/6bff6b?text=Wheelhouse+After'">
+                        <span class="image-number">03</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="work-summary">
+            <p>Major propulsion system overhaul, electrical upgrade, steel fabrication on deck, and full repainting. Completed 3 days ahead of schedule.</p>
+            <div class="services-list">
+                <span>Propulsion Overhaul</span>
+                <span>Electrical Upgrade</span>
+                <span>Steel Fabrication</span>
+                <span>Full Repainting</span>
+                <span>Docking Services</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="project-cta">
+        <h3>Have a vessel that needs attention?</h3>
+        <p>Whether it's a small repair or a complete overhaul, we're ready to help.</p>
+        <a href="contact.html" class="cta-button">📞 Request a Quote →</a>
+    </div>
+
+</div>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <img id="lightbox-img" src="" alt="">
+</div>
+
+<footer class="footer">
+    <p>&copy; 2025 Cizrein Marine Services Co. (CMSC). All rights reserved. | BIR & SEC Registered Partnership</p>
+</footer>
+
+<script>
+function openLightbox(imageSrc) {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    lightboxImg.src = imageSrc;
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeLightbox();
+});
+
+document.getElementById('lightbox-img')?.addEventListener('click', function(e) {
+    e.stopPropagation();
+});
+</script>
+
+</body>
+</html>
