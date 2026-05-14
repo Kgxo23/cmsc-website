@@ -86,7 +86,7 @@ body::after {
     left: 0;
     right: 0;
     width: 100%;
-    background: rgba(21, 101, 192, 0.68);
+    background: rgba(21, 101, 192, 0.85); /* Made darker for better visibility */
     backdrop-filter: blur(16px) saturate(180%);
     -webkit-backdrop-filter: blur(16px) saturate(180%);
     display: flex;
@@ -95,7 +95,7 @@ body::after {
     padding: 0 60px;
     height: 80px;
     z-index: 1000;
-    border-bottom: 1px solid rgba(0, 188, 212, 0.55);
+    border-bottom: 1px solid rgba(0, 188, 212, 0.7);
     box-shadow: 0 1px 0 rgba(0, 188, 212, 0.2), 0 4px 20px rgba(0, 0, 0, 0.15);
     transition: all 0.3s ease;
 }
@@ -118,17 +118,24 @@ body::after {
 }
 
 .navbar:hover {
-    background: rgba(21, 101, 192, 0.78);
+    background: rgba(21, 101, 192, 0.95);
     box-shadow: 0 1px 0 rgba(0, 188, 212, 0.35), 0 6px 24px rgba(0, 0, 0, 0.2);
 }
 
-/* LOGO - moved more to the left */
+/* LOGO - made clickable with anchor tag, moved more to the left */
 .logo {
     flex-shrink: 0;
     display: flex;
     align-items: center;
     height: 100%;
     margin-left: -20px;
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    text-decoration: none;
 }
 
 .logo img {
@@ -144,7 +151,7 @@ body::after {
     filter: drop-shadow(0 0 18px rgba(0, 188, 212, 0.8));
 }
 
-/* NAV LINKS */
+/* NAV LINKS - Made more visible */
 .navbar nav {
     flex-shrink: 0;
     display: flex;
@@ -154,12 +161,12 @@ body::after {
 }
 
 .navbar nav a {
-    color: rgba(255, 255, 255, 0.88);
+    color: #ffffff; /* Pure white for better visibility */
     margin-left: 36px;
     text-decoration: none;
     font-family: 'Barlow', sans-serif;
-    font-weight: 600;
-    font-size: 0.82rem;
+    font-weight: 700; /* Bolder for visibility */
+    font-size: 0.85rem;
     letter-spacing: 1.8px;
     text-transform: uppercase;
     padding: 6px 0 5px;
@@ -187,7 +194,7 @@ body::after {
 }
 
 .navbar nav a:hover {
-    color: #ffffff;
+    color: #4dd0e1;
     transform: translateY(-1px);
 }
 
@@ -288,10 +295,10 @@ body::after {
 
 /* ===== ROYAL/AQUA GLASS FOOTER ===== */
 .footer {
-    background: rgba(21, 101, 192, 0.68);
+    background: rgba(21, 101, 192, 0.85);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
-    color: rgba(255, 255, 255, 0.85);
+    color: rgba(255, 255, 255, 0.95);
     text-align: center;
     padding: 13px 20px;
     position: fixed;
@@ -303,15 +310,15 @@ body::after {
     letter-spacing: 0.8px;
     text-transform: uppercase;
     z-index: 100;
-    border-top: 1px solid rgba(0, 188, 212, 0.4);
+    border-top: 1px solid rgba(0, 188, 212, 0.5);
     box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.12);
     transition: all 0.3s ease;
 }
 
 .footer:hover {
-    background: rgba(21, 101, 192, 0.78);
+    background: rgba(21, 101, 192, 0.95);
     color: white;
-    border-top-color: rgba(0, 188, 212, 0.65);
+    border-top-color: rgba(0, 188, 212, 0.8);
 }
 
 /* Royal/Aqua accent line at bottom of footer */
@@ -347,8 +354,8 @@ body::after {
     }
     
     .navbar nav a {
-        margin-left: 22px;
-        font-size: 0.78rem;
+        margin-left: 18px;
+        font-size: 0.72rem;
         letter-spacing: 1.4px;
     }
     
@@ -365,7 +372,7 @@ body::after {
 
 @media (max-width: 580px) {
     .navbar {
-        padding: 0 20px;
+        padding: 0 15px;
         height: 64px;
     }
     
@@ -378,8 +385,8 @@ body::after {
     }
     
     .navbar nav a {
-        margin-left: 14px;
-        font-size: 0.72rem;
+        margin-left: 12px;
+        font-size: 0.65rem;
         letter-spacing: 1.2px;
     }
     
@@ -396,7 +403,7 @@ body::after {
 
 @media (max-width: 420px) {
     .navbar {
-        padding: 0 14px;
+        padding: 0 10px;
         height: 58px;
     }
     
@@ -409,9 +416,9 @@ body::after {
     }
     
     .navbar nav a {
-        margin-left: 10px;
-        font-size: 0.65rem;
-        letter-spacing: 1px;
+        margin-left: 8px;
+        font-size: 0.58rem;
+        letter-spacing: 0.8px;
     }
     
     .hero-content img {
@@ -440,15 +447,18 @@ body::after {
 <!-- White-based blur vignette overlay (bright, airy) -->
 <div class="blur-vignette"></div>
 
-<!-- ROYAL & AQUA BLUE GLASS NAVBAR with logo shifted left -->
+<!-- ROYAL & AQUA BLUE GLASS NAVBAR with PROJECTS link -->
 <header class="navbar">
     <div class="logo">
-        <img src="images/ship-logo.png" alt="CMSC Logo">
+        <a href="index.html">
+            <img src="images/ship-logo.png" alt="CMSC Logo - Click to go home">
+        </a>
     </div>
     <nav>
         <a href="index.html" class="active">HOME</a>
         <a href="about.html">ABOUT</a>
         <a href="services.html">SERVICES</a>
+        <a href="projects.html">PROJECTS</a>
         <a href="contact.html">CONTACT</a>
     </nav>
 </header>
