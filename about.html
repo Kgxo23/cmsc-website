@@ -122,13 +122,20 @@ body::after {
     box-shadow: 0 1px 0 rgba(0, 188, 212, 0.35), 0 6px 24px rgba(0, 0, 0, 0.2);
 }
 
-/* LOGO */
+/* LOGO - Made clickable with anchor tag */
 .logo {
     flex-shrink: 0;
     display: flex;
     align-items: center;
     height: 100%;
     margin-left: -20px;
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    text-decoration: none;
 }
 
 .logo img {
@@ -558,15 +565,19 @@ body::after {
 <!-- White-based blur vignette overlay (bright, airy) -->
 <div class="blur-vignette"></div>
 
-<!-- ROYAL & AQUA BLUE GLASS NAVBAR -->
+<!-- ROYAL & AQUA BLUE GLASS NAVBAR with clickable logo that directs to home -->
 <header class="navbar">
     <div class="logo">
-        <img src="images/ship-logo.png" alt="CMSC Logo">
+        <!-- Logo wrapped in anchor tag that directs to home (index.html) -->
+        <a href="index.html">
+            <img src="images/ship-logo.png" alt="CMSC Logo - Click to go home">
+        </a>
     </div>
     <nav>
         <a href="index.html">HOME</a>
         <a href="about.html" class="active">ABOUT</a>
         <a href="services.html">SERVICES</a>
+        <a href="projects.html">PROJECTS</a>
         <a href="contact.html">CONTACT</a>
     </nav>
 </header>
