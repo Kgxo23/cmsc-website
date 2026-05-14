@@ -116,12 +116,20 @@ body::after {
     box-shadow: 0 1px 0 rgba(0, 188, 212, 0.35), 0 6px 24px rgba(0, 0, 0, 0.2);
 }
 
+/* LOGO - Made clickable with anchor tag */
 .logo {
     flex-shrink: 0;
     display: flex;
     align-items: center;
     height: 100%;
     margin-left: -20px;
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    text-decoration: none;
 }
 
 .logo img {
@@ -731,14 +739,18 @@ body::after {
 
 <div class="blur-vignette"></div>
 
+<!-- ROYAL & AQUA BLUE GLASS NAVBAR with CLICKABLE LOGO (links to home) -->
 <header class="navbar">
     <div class="logo">
-        <img src="images/ship-logo.png" alt="CMSC Logo">
+        <a href="index.html">
+            <img src="images/ship-logo.png" alt="CMSC Logo - Click to go home">
+        </a>
     </div>
     <nav>
         <a href="index.html">HOME</a>
         <a href="about.html">ABOUT</a>
         <a href="services.html">SERVICES</a>
+        <a href="projects.html">PROJECTS</a>
         <a href="contact.html" class="active">CONTACT</a>
     </nav>
 </header>
@@ -811,23 +823,23 @@ body::after {
     </div>
 </div>
 
-<!-- TWO MAPS SECTION WITH LIGHTBOX -->
+<!-- TWO MAPS SECTION WITH FIXED LIGHTBOX (CORRECT IMAGES PER CARD) -->
 <div class="maps-section">
     <h2>Our Locations</h2>
     <div class="maps-grid">
         
         <!-- Main Office Map Card -->
-        <div class="map-card">
+        <div class="map-card" data-map-type="office">
             <h3>🏢 Main Office</h3>
             <p>Subic Bay Freeport Zone, Philippines</p>
             
-            <!-- Map Image - Click to open lightbox -->
-            <div class="map-image-container" onclick="openLightbox('images/clc-map.png', 'Main Office - Subic Bay Freeport Zone')">
-                <img src="images/clc-map.png" alt="Subic Bay Office Location Map" class="map-image" onerror="this.src='https://maps.app.goo.gl/fH2627tRxUEWEFta9'">
+            <!-- Map Image - Click to open lightbox with office full-size map -->
+            <div class="map-image-container" onclick="openLightboxWithImage('images/clc-map.png', 'Main Office - Subic Bay Freeport Zone (Full Map)')">
+                <img src="images/clc-map.png" alt="Subic Bay Office Location Map" class="map-image" onerror="this.src='https://placehold.co/600x400/1a2a3a/4dd0e1?text=Subic+Office+Map'">
             </div>
                 
             <div class="map-actions">
-                <button class="map-btn map-btn-view" onclick="openLightbox('images/cmsc-map.png', 'Main Office - Subic Bay Freeport Zone')">
+                <button class="map-btn map-btn-view" onclick="openLightboxWithImage('images/clc-map.png', 'Main Office - Subic Bay Freeport Zone (Detailed Map)')">
                     🔍 View Full Size
                 </button>
                 <a href="https://maps.app.goo.gl/fH2627tRxUEWEFta9" target="_blank" class="map-btn map-btn-nav">
@@ -835,22 +847,22 @@ body::after {
                 </a>
             </div>
             <div class="map-note">
-                Tap "View Full Size" to see full map
+                Tap "View Full Size" to see detailed map
             </div>
         </div>
         
         <!-- Shipyard Map Card -->
-        <div class="map-card">
+        <div class="map-card" data-map-type="shipyard">
             <h3>🏭 Shipyard Branch</h3>
             <p>Cebu Dry Dock Complex, Cebu City</p>
             
-            <!-- Map Image - Click to open lightbox -->
-            <div class="map-image-container" onclick="openLightbox('images/clc-map.png', 'Shipyard Branch - Cebu Dry Dock Complex')">
+            <!-- Map Image - Click to open lightbox with shipyard full-size map -->
+            <div class="map-image-container" onclick="openLightboxWithImage('images/cmsc-map.png', 'Shipyard Branch - Cebu Dry Dock Complex (Full Map)')">
                 <img src="images/cmsc-map.png" alt="Cebu Shipyard Location Map" class="map-image" onerror="this.src='https://placehold.co/600x400/1a2a3a/4dd0e1?text=Cebu+Shipyard+Map'">
             </div>
             
             <div class="map-actions">
-                <button class="map-btn map-btn-view" onclick="openLightbox('images/clc-map.png', 'Shipyard Branch - Cebu Dry Dock Complex')">
+                <button class="map-btn map-btn-view" onclick="openLightboxWithImage('images/cmsc-map.png', 'Shipyard Branch - Cebu Dry Dock Complex (Detailed Map)')">
                     🔍 View Full Size
                 </button>
                 <a href="https://maps.app.goo.gl/zd6YQBm651LheZ4j7" target="_blank" class="map-btn map-btn-nav">
@@ -858,7 +870,7 @@ body::after {
                 </a>
             </div>
             <div class="map-note">
-                Tap "View Full Size" to see full map
+                Tap "View Full Size" to see detailed map
             </div>
         </div>
         
@@ -877,26 +889,35 @@ body::after {
 </footer>
 
 <script>
-// Lightbox functions
-function openLightbox(imageSrc, caption) {
+// Lightbox functions - each card now shows its correct distinct image
+function openLightboxWithImage(imageSrc, caption) {
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const lightboxCaption = document.getElementById('lightbox-caption');
     
-    lightboxImg.src = imageSrc;
-    lightboxCaption.textContent = caption;
-    lightbox.classList.add('active');
+    if (imageSrc && imageSrc.trim() !== '') {
+        lightboxImg.src = imageSrc;
+    } else {
+        lightboxImg.src = 'https://placehold.co/800x600/1a2a3a/4dd0e1?text=Map+Preview';
+    }
     
-    // Prevent body scrolling when lightbox is open
+    lightboxCaption.textContent = caption || 'Location Map';
+    lightbox.classList.add('active');
     document.body.style.overflow = 'hidden';
 }
 
 function closeLightbox() {
     const lightbox = document.getElementById('lightbox');
     lightbox.classList.remove('active');
-    
-    // Restore body scrolling
     document.body.style.overflow = '';
+}
+
+// Prevent closing when clicking on the image itself
+const lightboxImgElement = document.getElementById('lightbox-img');
+if (lightboxImgElement) {
+    lightboxImgElement.addEventListener('click', function(e) {
+        e.stopPropagation();
+    });
 }
 
 // Close lightbox with Escape key
